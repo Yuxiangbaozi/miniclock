@@ -4,9 +4,6 @@ Page({
   data: {
     active1: false,
   },
-  onShow(){
-    http.get('/todos')
-  },
   down() {
     this.setData({ active1: true })
   },
@@ -14,26 +11,31 @@ Page({
     this.setData({ active1: false })
   },
   login(event){
-    let code
     let iv = event.detail.iv
     let encrypted_data = event.detail.encryptedData
+    this.wxlogin(iv, encrypted_data)
+  },
+  wxlogin(iv, encrypted_data){
     wx.login({
-      success(res) {
-        code = res.code
-        http.post('/sign_in/mini_program_user', {
-          code,
-          iv,
-          encrypted_data,
-          app_id,
-          app_secret
-        })
-        .then((response)=> {
-          wx.setStorageSync('me', response.data.resource)
-          wx.reLaunch({
-            url: '/pages/clock/clock',
-          })
-        })
+      success: (res)=> {
+        let code = res.code
+        this.loginMe(code, iv, encrypted_data)
       }
     })
   },
+  loginMe(code, iv, encrypted_data){
+    http.post('/sign_in/mini_program_user', {
+      code,
+      iv,
+      encrypted_data,
+      app_id,
+      app_secret
+    }).then((response) => {
+      wx.setStorageSync('me', response.response.data.resource)
+      wx.setStorageSync('X-token', response.response.header["X-token"])
+      wx.reLaunch({
+        url: '/pages/clock/clock',
+      })
+    })
+  }
 })

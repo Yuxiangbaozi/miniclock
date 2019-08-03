@@ -4,7 +4,7 @@
 //http.delete
 const { host, t_app_id, t_app_secret } = getApp().globalData
 
-const HTTP = (method,url,data)=> {
+const HTTP = (method, url, data)=> {
   return new Promise((resolve, reject)=> {
     wx.request({
       url: `${host}${url}`,
@@ -49,16 +49,16 @@ const HTTP = (method,url,data)=> {
 
 const http = {
   get(url, parmas){
-    HTTP('GET', url, parmas)
+    return HTTP('GET', url, parmas)
   },
   post(url, data){
-    HTTP('POST', url, data)
+    return HTTP('POST', url, data)
   },
   put(url, data){
-    HTTP('PUT', url, data)
+    return HTTP('PUT', url, data)
   },
   delete(url, data){
-    HTTP('Delete', url, data)
+    return HTTP('Delete', url, data)
   }
 }
 

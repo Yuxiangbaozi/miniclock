@@ -1,6 +1,6 @@
 <!--pages/login/login.wxml-->
 <view class='login'>
-  <view class="avatar {{active1? 'active':''}}" bindtouchstart="down" bindtouchend="up" open-type="getUserInfo" bindgetuserinfo="login">
+  <view class="avatar {{active1? 'active':''}}" bindtouchstart="down" bindtouchend="up">
     <open-data type='userAvatarUrl'></open-data>
   </view>
   <view class='loginName'>

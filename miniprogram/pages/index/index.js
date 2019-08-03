@@ -1,53 +1,101 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var app = getApp();
+const date = new Date()
+const hours = []
+const minutes = []
+const seconds = []
+const year = date.getFullYear()
+const month = date.getMonth() + 1
+const day = date.getDate()
+
+for (let i = 0; i <= 23; i++) {
+  hours.push(i)
+}
+
+for (let i = 0; i <= 59; i++) {
+  minutes.push(i)
+}
+
+for (let i = 0; i <= 59; i++) {
+  seconds.push(i)
+}
 Page({
-    data: {
-        motto: '点击 “编译” 以构建',
-        userInfo: {},
-        hasUserInfo: false,
-        canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    },
-    bindViewTap: function () {
-        wx.navigateTo({
-            url: '../logs/logs'
-        });
-    },
-    onLoad: function () {
-        var _this = this;
-        if (app.globalData.userInfo) {
-            this.setData({
-                userInfo: app.globalData.userInfo,
-                hasUserInfo: true,
-            });
-        }
-        else if (this.data.canIUse) {
-            app.userInfoReadyCallback = function (res) {
-                _this.setData({
-                    userInfo: res,
-                    hasUserInfo: true
-                });
-            };
-        }
-        else {
-            wx.getUserInfo({
-                success: function (res) {
-                    app.globalData.userInfo = res.userInfo;
-                    _this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true
-                    });
-                }
-            });
-        }
-    },
-    getUserInfo: function (e) {
-        console.log(e);
-        app.globalData.userInfo = e.detail.userInfo;
-        this.setData({
-            userInfo: e.detail.userInfo,
-            hasUserInfo: true
-        });
+  data: {
+    date: '2018-08-03',
+    now: `${year}-${month}-${day}`,
+    defaultTime: 0,
+    defaultDate: 0,
+    countDown: 0,
+    time: "",
+    timer: null,
+    status: 'start',
+    hours: hours,
+    hour: date.getHours(),
+    minutes: minutes,
+    minute: date.getMinutes(),
+    seconds: seconds,
+    second: date.getSeconds(),
+    value: [date.getHours(), date.getMinutes(), date.getSeconds()],
+    opentime: false,
+  },
+  onShow: function () {
+    this.changeTime()
+  },
+  changeTime() {
+    let h = Math.floor(this.data.defaultTime / 3600)
+    let m = Math.floor(this.data.defaultTime / 60)
+    let s = Math.floor(this.data.defaultTime % 60)
+    if (s === 0) {
+      s = "00"
     }
+    if (m === 60) {
+      m = "00"
+    }
+    if (m > 60) {
+      m = m % 60
+    }
+    if ((s + "").length === 1) {
+      s = '0' + s
+    }
+    if ((m + "").length === 1) {
+      m = '0' + m
+    }
+    if ((h + "").length === 1) {
+      h = '0' + h
+    }
+    this.setData({ time: `${h}:${m}:${s}` })
+  },
+  bindChange: function (event) {
+    const val = event.detail.value
+    this.setData({
+      hour: this.data.hours[val[0]],
+      minute: this.data.minutes[val[1]],
+      second: this.data.seconds[val[2]]
+    })
+    let str = `${this.data.hour}:${this.data.minute}:${this.data.second}`
+    let arr = str.split(':')
+    let time = parseInt(arr[0]) * 3600 + parseInt(arr[1]) * 60 + parseInt(arr[2])
+    this.data.defaultTime = time
+    this.changeTime()
+    this.setData({ countDown: time + this.data.defaultDate})
+  },
+  closeSelect() {
+    this.setData({ opentime: false })
+  },
+  openSelectTime() {
+    this.setData({ opentime: true })
+  },
+  bindDateChange: function (event) {
+    console.log('picker发送选择改变，携带值为', event.detail.value)
+    this.setData({
+      date: event.detail.value
+    })
+  },
+  changeDate(){
+    let time = this.data.countDown
+    if (time < 60) { return '1分钟内' }
+    else if (time / 60 < 60) { return parseInt(time / 60) + '分钟后' }
+    else if (time / 3600 < 24) { return parseInt(time / 3600) + '小时后' }
+    else if (time / 86400 < 31) { return parseInt(time / 86400) + '天后' }
+    else if (time / 2592000 < 12) { return parseInt(time / 2592000) + '月后' }
+    else { return parseInt(time / 31536000) + '年后' }
+  }
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUlBLElBQU0sR0FBRyxHQUFHLE1BQU0sRUFBVSxDQUFBO0FBRTVCLElBQUksQ0FBQztJQUNILElBQUksRUFBRTtRQUNKLEtBQUssRUFBRSxhQUFhO1FBQ3BCLFFBQVEsRUFBRSxFQUFFO1FBQ1osV0FBVyxFQUFFLEtBQUs7UUFDbEIsT0FBTyxFQUFFLEVBQUUsQ0FBQyxPQUFPLENBQUMsOEJBQThCLENBQUM7S0FDcEQ7SUFFRCxXQUFXO1FBQ1QsRUFBRSxDQUFDLFVBQVUsQ0FBQztZQUNaLEdBQUcsRUFBRSxjQUFjO1NBQ3BCLENBQUMsQ0FBQTtJQUNKLENBQUM7SUFDRCxNQUFNO1FBQU4saUJBMkJDO1FBMUJDLElBQUksR0FBRyxDQUFDLFVBQVUsQ0FBQyxRQUFRLEVBQUU7WUFDM0IsSUFBSSxDQUFDLE9BQVEsQ0FBQztnQkFDWixRQUFRLEVBQUUsR0FBRyxDQUFDLFVBQVUsQ0FBQyxRQUFRO2dCQUNqQyxXQUFXLEVBQUUsSUFBSTthQUNsQixDQUFDLENBQUE7U0FDSDthQUFNLElBQUksSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUM7WUFHM0IsR0FBRyxDQUFDLHFCQUFxQixHQUFHLFVBQUMsR0FBRztnQkFDOUIsS0FBSSxDQUFDLE9BQVEsQ0FBQztvQkFDWixRQUFRLEVBQUUsR0FBRztvQkFDYixXQUFXLEVBQUUsSUFBSTtpQkFDbEIsQ0FBQyxDQUFBO1lBQ0osQ0FBQyxDQUFBO1NBQ0Y7YUFBTTtZQUVMLEVBQUUsQ0FBQyxXQUFXLENBQUM7Z0JBQ2IsT0FBTyxFQUFFLFVBQUEsR0FBRztvQkFDVixHQUFHLENBQUMsVUFBVSxDQUFDLFFBQVEsR0FBRyxHQUFHLENBQUMsUUFBUSxDQUFBO29CQUN0QyxLQUFJLENBQUMsT0FBUSxDQUFDO3dCQUNaLFFBQVEsRUFBRSxHQUFHLENBQUMsUUFBUTt3QkFDdEIsV0FBVyxFQUFFLElBQUk7cUJBQ2xCLENBQUMsQ0FBQTtnQkFDSixDQUFDO2FBQ0YsQ0FBQyxDQUFBO1NBQ0g7SUFDSCxDQUFDO0lBRUQsV0FBVyxZQUFDLENBQU07UUFDaEIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQTtRQUNkLEdBQUcsQ0FBQyxVQUFVLENBQUMsUUFBUSxHQUFHLENBQUMsQ0FBQyxNQUFNLENBQUMsUUFBUSxDQUFBO1FBQzNDLElBQUksQ0FBQyxPQUFRLENBQUM7WUFDWixRQUFRLEVBQUUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxRQUFRO1lBQzNCLFdBQVcsRUFBRSxJQUFJO1NBQ2xCLENBQUMsQ0FBQTtJQUNKLENBQUM7Q0FDRixDQUFDLENBQUEiLCJzb3VyY2VzQ29udGVudCI6WyIvL2luZGV4LmpzXG4vL+iOt+WPluW6lOeUqOWunuS+i1xuaW1wb3J0IHsgSU15QXBwIH0gZnJvbSAnLi4vLi4vYXBwJ1xuXG5jb25zdCBhcHAgPSBnZXRBcHA8SU15QXBwPigpXG5cblBhZ2Uoe1xuICBkYXRhOiB7XG4gICAgbW90dG86ICfngrnlh7sg4oCc57yW6K+R4oCdIOS7peaehOW7uicsXG4gICAgdXNlckluZm86IHt9LFxuICAgIGhhc1VzZXJJbmZvOiBmYWxzZSxcbiAgICBjYW5JVXNlOiB3eC5jYW5JVXNlKCdidXR0b24ub3Blbi10eXBlLmdldFVzZXJJbmZvJyksXG4gIH0sXG4gIC8v5LqL5Lu25aSE55CG5Ye95pWwXG4gIGJpbmRWaWV3VGFwKCkge1xuICAgIHd4Lm5hdmlnYXRlVG8oe1xuICAgICAgdXJsOiAnLi4vbG9ncy9sb2dzJ1xuICAgIH0pXG4gIH0sXG4gIG9uTG9hZCgpIHtcbiAgICBpZiAoYXBwLmdsb2JhbERhdGEudXNlckluZm8pIHtcbiAgICAgIHRoaXMuc2V0RGF0YSEoe1xuICAgICAgICB1c2VySW5mbzogYXBwLmdsb2JhbERhdGEudXNlckluZm8sXG4gICAgICAgIGhhc1VzZXJJbmZvOiB0cnVlLFxuICAgICAgfSlcbiAgICB9IGVsc2UgaWYgKHRoaXMuZGF0YS5jYW5JVXNlKXtcbiAgICAgIC8vIOeUseS6jiBnZXRVc2VySW5mbyDmmK/nvZHnu5zor7fmsYLvvIzlj6/og73kvJrlnKggUGFnZS5vbkxvYWQg5LmL5ZCO5omN6L+U5ZueXG4gICAgICAvLyDmiYDku6XmraTlpITliqDlhaUgY2FsbGJhY2sg5Lul6Ziy5q2i6L+Z56eN5oOF5Ya1XG4gICAgICBhcHAudXNlckluZm9SZWFkeUNhbGxiYWNrID0gKHJlcykgPT4ge1xuICAgICAgICB0aGlzLnNldERhdGEhKHtcbiAgICAgICAgICB1c2VySW5mbzogcmVzLFxuICAgICAgICAgIGhhc1VzZXJJbmZvOiB0cnVlXG4gICAgICAgIH0pXG4gICAgICB9XG4gICAgfSBlbHNlIHtcbiAgICAgIC8vIOWcqOayoeaciSBvcGVuLXR5cGU9Z2V0VXNlckluZm8g54mI5pys55qE5YW85a655aSE55CGXG4gICAgICB3eC5nZXRVc2VySW5mbyh7XG4gICAgICAgIHN1Y2Nlc3M6IHJlcyA9PiB7XG4gICAgICAgICAgYXBwLmdsb2JhbERhdGEudXNlckluZm8gPSByZXMudXNlckluZm9cbiAgICAgICAgICB0aGlzLnNldERhdGEhKHtcbiAgICAgICAgICAgIHVzZXJJbmZvOiByZXMudXNlckluZm8sXG4gICAgICAgICAgICBoYXNVc2VySW5mbzogdHJ1ZVxuICAgICAgICAgIH0pXG4gICAgICAgIH1cbiAgICAgIH0pXG4gICAgfVxuICB9LFxuXG4gIGdldFVzZXJJbmZvKGU6IGFueSkge1xuICAgIGNvbnNvbGUubG9nKGUpXG4gICAgYXBwLmdsb2JhbERhdGEudXNlckluZm8gPSBlLmRldGFpbC51c2VySW5mb1xuICAgIHRoaXMuc2V0RGF0YSEoe1xuICAgICAgdXNlckluZm86IGUuZGV0YWlsLnVzZXJJbmZvLFxuICAgICAgaGFzVXNlckluZm86IHRydWVcbiAgICB9KVxuICB9XG59KVxuIl19

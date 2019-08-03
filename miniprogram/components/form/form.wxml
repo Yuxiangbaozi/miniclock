@@ -1,0 +1,12 @@
+<!--components/confirm/confirm.wxml-->
+<view class='form' wx:if='{{visible}}'>
+  <view class='wrapper'>
+    <textarea placeholder='{{placeholder}}' value='{{value}}'
+    bindinput='watchValue'
+    ></textarea>
+    <view class='form-button'>
+      <button hover-class='active' class='ok' bindtap='sure'>确定</button>
+      <button hover-class='active' class='cancel' bindtap='cancel'>取消</button>
+    </view>
+  </view>
+</view>

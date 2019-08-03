@@ -1,0 +1,28 @@
+/* components/button/button.wxss */
+button::after{
+ border: none
+}
+.mini-button-hover{
+  opacity: 0.6;
+}
+.mini-button{
+  width: 540rpx;
+  height: 80rpx;
+  font-size: 36rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  color: blue;
+  border: 2rpx solid rgb(68, 68, 230);
+  border-radius: 16rpx;
+  background: transparent;
+  box-shadow: 0 0 3rpx 2rpx rgba(68, 68, 230,0.3);
+}
+.colorful{
+  background: linear-gradient(to right,rgb(127, 127, 240),rgb(68, 68, 230));
+  color: white;
+}
+.mini{
+  width: 360rpx;
+}

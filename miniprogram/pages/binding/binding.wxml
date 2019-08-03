@@ -1,0 +1,13 @@
+<!--pages/binding/binding.wxml-->
+<view class="binding">
+  <text class="textA" wx:if="{{isBind}}">绑定PC账号</text>
+  <text class="textA" wx:else>注册PC账号</text>
+  <view class="wrapper">
+    <input placeholder="账号" bindinput="watchAccount" value="{{account}}"></input>
+    <input placeholder="密码" bindinput="watchPassword" password="{{password}}"></input>
+  </view>
+  <g-button mini colorful text="绑定" wx:if="{{isBind}}" bindtap="aaa"></g-button>
+  <g-button mini colorful text="注册" wx:else bindtap="sss"></g-button>
+  <text class="textB" bindtap="zzz" wx:if="{{isBind}}">还没PC账号？去注册></text>
+  <text class="textB" bindtap="ccc" wx:else>已有PC账号？去同步></text>
+</view>

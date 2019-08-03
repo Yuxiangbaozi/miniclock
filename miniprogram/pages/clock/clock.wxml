@@ -1,0 +1,32 @@
+<!--pages/clock/clock.wxml-->
+<view class='clock'>
+  <view class='cover' wx:if="{{open}}"></view>
+  <view class='pucture'><g-clock text="{{time}}" fontSize="56" bindtap='openSelect'></g-clock></view>
+  <view class="btn1">
+    <g-button text='暂停' mini wx:if="{{status === 'stop'}}" bindtap='clearTime'></g-button>
+    <g-button colorful text='开始倒计时' mini wx:else="{{status === 'start'}}" bindtap='continueTime'></g-button>
+  </view>
+  <view class="btn2">
+    <g-button text='清零' mini bindtap='cancelTime'></g-button>
+  </view>
+  <view class='btn3'>
+    <g-button colorful text='设置闹钟' bindtap='changeHome'></g-button>
+  </view>
+  <view class='selectWrapper' wx:if="{{open}}">
+  <view class='selectTime'>
+    <view class='time'>{{hour}}:{{minute}}:{{second}}</view>
+    <view class='img' bindtap='closeSelect'><image src="../../images/point.png"></image></view>
+    <picker-view indicator-class="selectView" mask-class="maskView" value="{{value}}" bindchange="bindChange">
+      <picker-view-column>
+        <view wx:for="{{hours}}">{{item}}时</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view wx:for="{{minutes}}">{{item}}分</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view wx:for="{{seconds}}">{{item}}秒</view>
+      </picker-view-column>
+    </picker-view>
+  </view>
+  </view>
+</view>

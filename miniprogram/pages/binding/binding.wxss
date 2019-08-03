@@ -1,0 +1,43 @@
+/* pages/binding/binding.wxss */
+.binding{
+  background: rgb(224, 250, 250);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.button-hover{
+  opacity: 0.6;
+}
+.binding .wrapper{
+  margin: 30rpx 0;
+  width: 70%;
+}
+.binding .wrapper>input{
+  border: 2rpx solid rgb(161, 161, 238);
+  border-radius: 10rpx;
+  margin: 48rpx 0;
+  padding: 16rpx 32rpx;
+  color: #333;
+  font-size: 28rpx;
+}
+.binding .wrapper>input:focus-within{
+  border: 2rpx solid rgb(24, 24, 240);
+  border-radius: 10rpx;
+}
+.binding .textA{
+  align-self: flex-start;
+  margin-top: 250rpx;
+  margin-left: 50rpx;
+  color: rgb(75, 75, 238);
+  font-size: 45rpx;
+}
+
+.binding .textB{
+  margin-top: 20rpx;
+  color: #333;
+  font-size: 32rpx;
+}
+.binding text:hover{
+  color: #bbb;
+}

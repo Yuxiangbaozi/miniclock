@@ -1,0 +1,2 @@
+<!--components/button/button.wxml-->
+<button class='mini-button,{{mini ? "mini" : ""}},{{colorful ? "colorful" : ""}}'>{{text}}</button>

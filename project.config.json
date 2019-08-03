@@ -5,14 +5,29 @@
 	},
 	"miniprogramRoot": "miniprogram/",
 	"compileType": "miniprogram",
-	"libVersion": "2.4.0",
+	"libVersion": "2.0.4",
 	"projectname": "miniclock",
 	"scripts": {
 		"beforeCompile": "npm run tsc",
 		"beforePreview": "npm run tsc",
 		"beforeUpload": "npm run tsc"
 	},
-	"setting": {},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
 	"appid": "wxa6aacc1314e6afa2",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},

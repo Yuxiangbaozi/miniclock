@@ -1,0 +1,51 @@
+/* pages/login/login.wxss */
+.login{
+  background: rgb(224, 250, 250);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.button-hover{
+  opacity: 0.6;
+}
+.login button{
+  width: 360rpx;
+  height: 80rpx;
+  font-size: 36rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  border: 2rpx solid rgb(68, 68, 230);
+  border-radius: 16rpx;
+  background: transparent;
+  box-shadow: 0 0 3rpx 2rpx rgba(68, 68, 230,0.3);
+  background: linear-gradient(to right,rgb(127, 127, 240),rgb(68, 68, 230));
+  color: white;
+}
+.login .avatar{
+  width: 270rpx;
+  height: 270rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 12rpx solid rgb(127, 127, 240);
+  transform: translateY(-50%)
+}
+.login .avatar.active{
+  opacity: 0.6;
+}
+.login .loginName{
+  margin-top: -100rpx;
+  margin-bottom: 25rpx;
+  transform: translateY(-50%);
+  color: rgb(75, 75, 238);
+  font-size: 38rpx;
+  position: relative;
+}
+.login navigator{
+  font-size: 28rpx;
+  transform: translateY(50%);
+  color: rgb(75, 75, 238);
+}

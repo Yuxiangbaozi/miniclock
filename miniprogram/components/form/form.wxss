@@ -1,0 +1,64 @@
+/* components/confirm/confirm.wxss */
+.form{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 30;
+}
+.form .wrapper{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 26rpx 20rpx 0 20rpx;
+  background: white;
+  border-radius: 16rpx;
+  width: 640rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.form .wrapper textarea{
+  background: #F2F2F2;
+  border-radius: 8rpx;
+  width: 100%;
+  height: 120rpx;
+  margin-bottom: 22rpx;
+  color: #737373;
+  padding: 10rpx;
+  font-size: 28rpx;
+}
+.form .wrapper .form-button{
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+.form .wrapper .form-button button{
+  width: 100%;
+  background: white;
+}
+.form .wrapper .form-button view{
+  width: 50%;
+  text-align: center;
+  height: 66rpx;
+}
+.form .wrapper .form-button .ok{
+  color: blue
+}
+.form .wrapper .form-button .active{
+ opacity: 0.6;
+}
+.form .wrapper .form-button::after{
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 5rpx;
+  height: 70%;
+  background: rgb(68, 68, 230)
+}

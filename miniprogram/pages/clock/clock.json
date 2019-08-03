@@ -2,7 +2,6 @@
   "usingComponents": {
     "g-button": "../../components/button/button",
     "g-clock": "../../components/clock/clock",
-    "g-form": "../../components/form/form",
-    "g-date": "../../components/date/date"
+    "g-form": "../../components/form/form"
   }
 }

@@ -1,13 +1,45 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+  <view class='cover' wx:if="{{opentime}}"></view>
+  <scroll-view class='todo' scroll-y="true">
+    <view class='item {{itemActive === item.id ? "itemActive" : ""}}' id='{{item.id}}' wx:for="{{list}}" wx:key="{{item.id}}" bindtap='activeItem' data-itemId='{{item.id}}'>
+      <view class='wrapper' id='wrapper'><text class='lastTime'>{{item.lastTime}}</text></view>
+      <text>{{item.text}}</text>
+    </view>
+  </scroll-view>
+  <view>
+    <g-button class='addclock' mini text='添加闹钟' colorful bindtap='openMission'></g-button>
+    <g-button mini text='删除闹钟' bindtap='deleteClock'></g-button>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class='clockView'>
+    <view class='dateWrapper'>
+      <g-date fontSize="56"></g-date>
+      <view class="section">
+        <picker mode="date" value="{{date}}" start="{{now}}" end="2020-12-31" bindchange="bindDateChange">
+          <view class="picker">{{date}}</view>
+        </picker>
+      </view>
+    </view>
+    <g-clock text="{{time}}" fontSize="56" bindtap='openSelectTime'></g-clock>
+  </view>
+  <view>
+    <g-form placeholder="请创建任务" visible='{{visible}}' bindsure="sure" bindcancel="cancel"></g-form>
+  </view>
+  <view class='selectWrapper' wx:if="{{opentime}}">
+    <view class='selectTime'>
+      <view class='time'>{{hour}}:{{minute}}:{{second}}</view>
+      <view class='img' bindtap='closeSelect'><image src="../../images/point.png"></image></view>
+      <picker-view indicator-class="selectView" mask-class="maskView" value="{{value}}" bindchange="bindChange">
+        <picker-view-column>
+          <view wx:for="{{hours}}">{{item}}时</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{minutes}}">{{item}}分</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{seconds}}">{{item}}秒</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
   </view>
 </view>

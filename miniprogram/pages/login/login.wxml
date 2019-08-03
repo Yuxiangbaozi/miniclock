@@ -1,0 +1,11 @@
+<!--pages/login/login.wxml-->
+<view class='login'>
+  <view class="avatar {{active1? 'active':''}}" bindtouchstart="down" bindtouchend="up" open-type="getUserInfo" bindgetuserinfo="login">
+    <open-data type='userAvatarUrl'></open-data>
+  </view>
+  <view class='loginName'>
+    <open-data type='userNickName'></open-data>
+  </view>
+  <button openType="getUserInfo" bindgetuserinfo="login">登录</button>
+  <navigator url="/pages/binding/binding">还没绑定PC端？去绑定></navigator>
+</view>

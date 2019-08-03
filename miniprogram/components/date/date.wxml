@@ -1,0 +1,5 @@
+<!--components/date/date.wxml-->
+<view class='mini-date' hover-class='active'>
+  <text style='font-size: {{fontSize + "rpx"}}'>{{text}}</text>
+  <image src='../../images/date.png'></image>
+</view>

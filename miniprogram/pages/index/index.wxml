@@ -2,9 +2,9 @@
 <view class="container">
   <view class='cover' wx:if="{{opentime}}"></view>
   <scroll-view class='todo' scroll-y="true">
-    <view class='item {{itemActive === item.id ? "itemActive" : ""}}' id='{{item.id}}' wx:for="{{list}}" wx:key="{{item.id}}" bindtap='activeItem' data-itemId='{{item.id}}'>
-      <view class='wrapper' id='wrapper'><text class='lastTime'>{{item.lastTime}}</text></view>
-      <text>{{item.text}}</text>
+    <view class='item {{itemActive === item.id ? "itemActive" : ""}}' id='{{item.id}}' wx:for="{{list}}" wx:key="{{item.id}}" bindtap='activeItem' data-itemId="{{item.id}}">
+      <view class='wrapper' id='wrapper'><text class='lastTime'>{{item.lasttime}}</text></view>
+      <text>{{item.text}}{{item.countDown}}</text>
     </view>
   </scroll-view>
   <view>

@@ -159,7 +159,7 @@ Page({
     return id
   },
   findMission(id){
-    let index = this.data.list.findIndex((el) => { return el.di = id })
+    let index = this.data.list.findIndex((el) => { return el.id === id })
     let obj = this.data.list[index]
     return obj
   },
@@ -168,6 +168,11 @@ Page({
     this.setData({ itemActive: id })
   },
   deleteClock(){
-    
+    let id = this.data.itemActive
+    let obj = this.findMission(id)
+    let arr = this.data.list
+    let index = arr.indexOf(obj)
+    arr.splice(index,1)
+    this.setData({ list: arr })
   }
 });
